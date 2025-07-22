@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 public class DashboardController {
@@ -19,19 +21,49 @@ public class DashboardController {
     public Button AttendenceControlbtn;
     public Button signOutbtn;
 
-    public void CourseControl(ActionEvent actionEvent) {
+    public void CourseControl(ActionEvent actionEvent) throws IOException {
+        Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/CoursecontrolPage.fxml")));
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(load);
+        stage .setScene(scene);
+        stage.show();
     }
 
-    public void StudentControl(ActionEvent actionEvent) {
+    public void StudentControl(ActionEvent actionEvent) throws IOException {
+        Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/StudentControlPage.fxml")));
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(load);
+        stage .setScene(scene);
+        stage.show();
     }
 
-    public void LectureControl(ActionEvent actionEvent) {
+    public void LectureControl(ActionEvent actionEvent) throws IOException {
+        Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/LectureControlPage.fxml")));
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(load);
+        stage .setScene(scene);
+        stage.show();
     }
 
-    public void SubjectControl(ActionEvent actionEvent) {
+    public void SubjectControl(ActionEvent actionEvent) throws IOException {
+        Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/SubjectControlPage.fxml")));
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(load);
+        stage .setScene(scene);
+        stage.show();
     }
 
-    public void AttendenceControl(ActionEvent actionEvent) {
+    public void AttendenceControl(ActionEvent actionEvent) throws IOException {
+        Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/AttendenceControlPage.fxml")));
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(load);
+        stage .setScene(scene);
+        stage.show();
     }
 
     public void signOut(ActionEvent actionEvent) {
