@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentControlPageController">
+   <children>
+      <AnchorPane layoutY="-2.0" prefHeight="452.0" prefWidth="195.0" style="-fx-background-color: #D2C1B6;">
+         <children>
+            <Label layoutX="51.0" layoutY="52.0" text="Welcome,">
+               <font>
+                  <Font name="Avenir-Heavy" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="79.0" layoutY="82.0" text="User" textFill="#171717">
+               <font>
+                  <Font name="Avenir-Heavy" size="20.0" />
+               </font>
+            </Label>
+            <Line endX="95.0" layoutX="99.0" layoutY="123.0" startX="-91.0" />
+            <Button fx:id="CourseControlbtn" layoutX="26.0" layoutY="147.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#stuCourseM" prefHeight="25.0" prefWidth="151.0" style="-fx-background-color: #456882;" text="Course Management" textFill="WHITE" />
+            <Button fx:id="StudentControlbtn" layoutX="26.0" layoutY="188.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="151.0" style="-fx-background-color: #456882;" text="Student Management" textFill="WHITE" />
+            <Button fx:id="LectureControlbtn" layoutX="26.0" layoutY="229.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#stuLectureM" prefHeight="25.0" prefWidth="151.0" style="-fx-background-color: #456882;" text="Lecturer Management" textFill="WHITE" />
+            <Button fx:id="SubjectControlbtn" layoutX="26.0" layoutY="269.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#stuSubjectM" prefHeight="25.0" prefWidth="151.0" style="-fx-background-color: #456882;" text="Subject Management" textFill="WHITE" />
+            <Button fx:id="AttendenceControlbtn" layoutX="27.0" layoutY="309.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#stuAttendenceM" style="-fx-background-color: #456882;" text="Attendence Management" textFill="WHITE" />
+            <Button fx:id="signOutbtn" layoutX="30.0" layoutY="361.0" mnemonicParsing="false" onAction="#signOut" style="-fx-background-color: #B33F40;" text="Logout" textFill="WHITE" />
+            <Button fx:id="Homebtn" layoutX="14.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#CHomeM" text="Home" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="ancStudent" layoutX="198.0" layoutY="1.0" minHeight="-Infinity" minWidth="-Infinity">
+         <children>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="231.0" prefWidth="551.0">
+               <children>
+                  <TableView fx:id="tblStudent" layoutY="25.0" minHeight="-Infinity" prefHeight="224.0" prefWidth="544.0" style="-fx-border-color: #1B3C53;">
+                     <columns>
+                        <TableColumn fx:id="studentIdcol" prefWidth="63.0" style="backgroud color: #1B3C53;" text="student_id " />
+                        <TableColumn fx:id="studentNamecol" prefWidth="64.0" style="backgroud color: #1B3C53;" text="name" />
+                        <TableColumn fx:id="studentRegNumbercol" prefWidth="73.0" style="backgroud color: #1B3C53;" text="reg_number" />
+                        <TableColumn fx:id="studentGendercol" prefWidth="47.0" style="backgroud color: #1B3C53;" text="gender" />
+                        <TableColumn fx:id="studentDobcol" prefWidth="61.0" style="backgroud color: #1B3C53;" text="dob" />
+                        <TableColumn fx:id="studentEmailcol" prefWidth="73.0" style="backgroud color: #1B3C53;" text="email" />
+                        <TableColumn fx:id="studentContactcol" prefWidth="77.0" style="backgroud color: #1B3C53;" text="contact" />
+                        <TableColumn fx:id="studentCourseIdcol" prefWidth="84.0" style="backgroud color: #1B3C53;" text="course_id" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutY="242.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="209.0" prefWidth="551.0" style="-fx-background-color: A2AADB;">
+               <children>
+                  <Label layoutX="14.0" layoutY="24.0" text="student_id">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="58.0" text="name">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="90.0" text="reg_number">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="262.0" layoutY="24.0" text="date of birth">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="262.0" layoutY="58.0" text="email">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="16.0" layoutY="124.0" text="gender">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="262.0" layoutY="92.0" text="contact">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="262.0" layoutY="126.0" text="course_id">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtStudentId" layoutX="90.0" layoutY="20.0" />
+                  <TextField fx:id="txtStudentName" layoutX="90.0" layoutY="54.0" />
+                  <TextField fx:id="txtStudentRegNumber" layoutX="90.0" layoutY="88.0" />
+                  <TextField fx:id="txtStudentEmail" layoutX="346.0" layoutY="54.0" />
+                  <TextField fx:id="txtStudentContact" layoutX="346.0" layoutY="88.0" />
+                  <TextField fx:id="txtStudentCourseId" layoutX="346.0" layoutY="122.0" />
+                  <DatePicker fx:id="dateDob" layoutX="347.0" layoutY="20.0" prefHeight="25.0" prefWidth="149.0" />
+                  <ChoiceBox fx:id="choiceStudentGender" layoutX="88.0" layoutY="122.0" prefWidth="150.0" />
+                  <Button layoutX="187.0" layoutY="176.0" mnemonicParsing="false" onAction="#StudentSearchOnAction" text="Search" />
+                  <Button layoutX="274.0" layoutY="176.0" mnemonicParsing="false" onAction="#StudentDeleteOnAction" text="Delete" />
+                  <Button layoutX="362.0" layoutY="176.0" mnemonicParsing="false" onAction="#StudentUpdateOnAction" text="Update" />
+                  <Button layoutX="444.0" layoutY="176.0" mnemonicParsing="false" onAction="#StudentSaveOnAction" text="Save" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="8.0" layoutX="327.0" layoutY="7.0" prefHeight="17.0" prefWidth="283.0" text="Student Management System" textOverrun="WORD_ELLIPSIS">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
