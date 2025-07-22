@@ -151,14 +151,91 @@ public class AttendenceControlPageController implements Initializable {
     }
 
     public void AttendenceSaveOnAction(ActionEvent actionEvent) {
+        String id = txtAttendanceId.getText();
+        String studentId = txtAttendenceStudentId.getText();
+        String classId = txtAttendenceClassId.getText();
+        String status = txtAttendenceStatus.getText();
+        String markedTime = txtAttendenceMarkedTime.getText();
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(
+                    "INSERT INTO Attendance (attendance_id, student_id, class_id, status, marked_time) VALUES (?, ?, ?, ?, ?)"
+            );
+            ps.setString(1, id);
+            ps.setString(2, studentId);
+            ps.setString(3, classId);
+            ps.setString(4, status);
+            ps.setString(5, markedTime);
+
+            if (ps.executeUpdate() > 0) {
+                new Alert(Alert.AlertType.INFORMATION, "Attendance Saved Successfully!").show();
+                loadAttendences();
+                clearFields();
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
     public void AttendenceSearchOnAction(ActionEvent actionEvent) {
+        String id = txtAttendanceId.getText();
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(
+                    "SELECT * FROM Attendance WHERE attendance_id = ?"
+            );
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                txtAttendenceStudentId.setText(rs.getString("student_id"));
+                txtAttendenceClassId.setText(rs.getString("class_id"));
+                txtAttendenceStatus.setText(rs.getString("status"));
+                txtAttendenceMarkedTime.setText(rs.getString("marked_time"));
+            } else {
+                new Alert(Alert.AlertType.WARNING, "No record found with this ID.").show();
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
 
     }
 
     public void AttendenceUpdateOnAction(ActionEvent actionEvent) {
+        String id = txtAttendanceId.getText();
+        String studentId = txtAttendenceStudentId.getText();
+        String classId = txtAttendenceClassId.getText();
+        String status = txtAttendenceStatus.getText();
+        String markedTime = txtAttendenceMarkedTime.getText();
 
+        try {
+            PreparedStatement ps = connection.prepareStatement(
+                    "UPDATE Attendance SET student_id = ?, class_id = ?, status = ?, marked_time = ? WHERE attendance_id = ?"
+            );
+            ps.setString(1, studentId);
+            ps.setString(2, classId);
+            ps.setString(3, status);
+            ps.setString(4, markedTime);
+            ps.setString(5, id);
+
+            if (ps.executeUpdate() > 0) {
+                new Alert(Alert.AlertType.INFORMATION, "Attendance Updated Successfully!").show();
+                loadAttendences();
+                clearFields();
+            } else {
+                new Alert(Alert.AlertType.WARNING, "Update failed. ID not found.").show();
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+
+    }
+    private void clearFields() {
+        txtAttendanceId.clear();
+        txtAttendenceStudentId.clear();
+        txtAttendenceClassId.clear();
+        txtAttendenceStatus.clear();
+        txtAttendenceMarkedTime.clear();
     }
 
     public void stuAttendenceM(ActionEvent actionEvent){

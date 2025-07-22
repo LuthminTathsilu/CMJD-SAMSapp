@@ -148,18 +148,126 @@ public class LectureControlPageController implements Initializable {
     }
 
     public void LectureSearchOnAction(ActionEvent actionEvent) {
+        String id = txtlectureId.getText();
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(
+                    "SELECT * FROM Lecturer WHERE lecturer_id = ?"
+            );
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                txtlectureName.setText(rs.getString("name"));
+                txtLEctureQualificaftion.setText(rs.getString("qualification"));
+                txtLectureDepartment.setText(rs.getString("department"));
+                txtLectureEmail.setText(rs.getString("email"));
+                txtLectureContact.setText(rs.getString("contact"));
+            } else {
+                new Alert(Alert.AlertType.WARNING, "Lecturer not found!").show();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
 
     }
 
     public void LectureDeleteOnAction(ActionEvent actionEvent) {
+        String id = txtlectureId.getText();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this lecturer?");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                PreparedStatement ps = connection.prepareStatement(
+                        "DELETE FROM Lecturer WHERE lecturer_id = ?"
+                );
+                ps.setString(1, id);
+
+                if (ps.executeUpdate() > 0) {
+                    new Alert(Alert.AlertType.INFORMATION, "Lecturer Deleted Successfully!").show();
+                    loadLecturerTable();
+                    clearFields();
+                } else {
+                    new Alert(Alert.AlertType.WARNING, "Delete failed. Lecturer ID not found.").show();
+                }
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            }
+        }
 
     }
 
     public void LectureUpdateOnAction(ActionEvent actionEvent) {
+        String id = txtlectureId.getText();
+        String name = txtlectureName.getText();
+        String qualification = txtLEctureQualificaftion.getText();
+        String department = txtLectureDepartment.getText();
+        String email = txtLectureEmail.getText();
+        String contact = txtLectureContact.getText();
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(
+                    "UPDATE Lecturer SET name = ?, qualification = ?, department = ?, email = ?, contact = ? WHERE lecturer_id = ?"
+            );
+            ps.setString(1, name);
+            ps.setString(2, qualification);
+            ps.setString(3, department);
+            ps.setString(4, email);
+            ps.setString(5, contact);
+            ps.setString(6, id);
+
+            if (ps.executeUpdate() > 0) {
+                new Alert(Alert.AlertType.INFORMATION, "Lecturer Updated Successfully!").show();
+                loadLecturerTable();
+                clearFields();
+            } else {
+                new Alert(Alert.AlertType.WARNING, "Update failed. Lecturer ID not found.").show();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
 
     }
 
     public void LectureSaveOnAction(ActionEvent actionEvent) {
+        String id = txtlectureId.getText();
+        String name = txtlectureName.getText();
+        String qualification = txtLEctureQualificaftion.getText();
+        String department = txtLectureDepartment.getText();
+        String email = txtLectureEmail.getText();
+        String contact = txtLectureContact.getText();
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(
+                    "INSERT INTO Lecturer (lecturer_id, name, qualification, department, email, contact) VALUES (?, ?, ?, ?, ?, ?)"
+            );
+            ps.setString(1, id);
+            ps.setString(2, name);
+            ps.setString(3, qualification);
+            ps.setString(4, department);
+            ps.setString(5, email);
+            ps.setString(6, contact);
+
+            if (ps.executeUpdate() > 0) {
+                new Alert(Alert.AlertType.INFORMATION, "Lecturer Saved Successfully!").show();
+                loadLecturerTable();
+                clearFields();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+
 
     }
+    private void clearFields() {
+        txtlectureId.clear();
+        txtlectureName.clear();
+        txtLEctureQualificaftion.clear();
+        txtLectureDepartment.clear();
+        txtLectureEmail.clear();
+        txtLectureContact.clear();
+    }
+
 }

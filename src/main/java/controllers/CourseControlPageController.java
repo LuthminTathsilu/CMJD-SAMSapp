@@ -140,14 +140,113 @@ public class CourseControlPageController implements Initializable {
     }
 
     public void CourseSaveOnAction(ActionEvent actionEvent) {
+        String courseId = txtCourseId.getText().trim();
+        String name = txtCourseName.getText().trim();
+        String description = txtCourseDescription.getText().trim();
+        String durationWeeks = txtCourseDurationWeeks.getText().trim();
+        String sql = "INSERT INTO Course(course_id, name, description, duration_weeks) VALUES (?, ?, ?, ?)";
+
+        try (PreparedStatement pst = connection.prepareStatement(sql)) {
+            pst.setString(1, courseId);
+            pst.setString(2, name);
+            pst.setString(3, description);
+            pst.setInt(4, Integer.parseInt(durationWeeks));
+
+            int affectedRows = pst.executeUpdate();
+
+            if (affectedRows > 0) {
+                new Alert(Alert.AlertType.INFORMATION, "Course saved successfully!").show();
+                clearFields();      // Clear fields after saving
+                loadCourseTable();  // Refresh table data
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Failed to save course!").show();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage()).show();
+        }
 
     }
 
     public void CourseUpdateOnAction(ActionEvent actionEvent) {
+        String courseId = txtCourseId.getText().trim();
+        String name = txtCourseName.getText().trim();
+        String description = txtCourseDescription.getText().trim();
+        String durationStr = txtCourseDurationWeeks.getText().trim();
+        if (courseId.isEmpty() || name.isEmpty() || description.isEmpty() || durationStr.isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Please fill all fields").show();
+            return;
+        }
+
+        int durationWeeks;
+        try {
+            durationWeeks = Integer.parseInt(durationStr);
+        } catch (NumberFormatException e) {
+            new Alert(Alert.AlertType.ERROR, "Duration must be a number").show();
+            return;
+        }
+
+        String sql = "UPDATE Course SET name = ?, description = ?, duration_weeks = ? WHERE course_id = ?";
+
+        try (PreparedStatement pst = connection.prepareStatement(sql)) {
+            pst.setString(1, name);
+            pst.setString(2, description);
+            pst.setInt(3, durationWeeks);
+            pst.setString(4, courseId);
+
+            int affectedRows = pst.executeUpdate();
+
+            if (affectedRows > 0) {
+                new Alert(Alert.AlertType.INFORMATION, "Course updated successfully!").show();
+                clearFields();
+                loadCourseTable();
+            } else {
+                new Alert(Alert.AlertType.WARNING, "No course found with this ID!").show();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage()).show();
+        }
 
     }
 
     public void CourseDeleteOnAction(ActionEvent actionEvent) {
+        String courseId = txtCourseId.getText().trim();
 
+        if (courseId.isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Please select a course to delete").show();
+            return;
+        }
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this course?", ButtonType.YES, ButtonType.NO);
+        Optional<ButtonType> option = alert.showAndWait();
+
+        if (option.isPresent() && option.get() == ButtonType.YES) {
+            String sql = "DELETE FROM Course WHERE course_id = ?";
+
+            try (PreparedStatement pst = connection.prepareStatement(sql)) {
+                pst.setString(1, courseId);
+
+                int affectedRows = pst.executeUpdate();
+
+                if (affectedRows > 0) {
+                    new Alert(Alert.AlertType.INFORMATION, "Course deleted successfully!").show();
+                    clearFields();
+                    loadCourseTable();
+                } else {
+                    new Alert(Alert.AlertType.WARNING, "No course found with this ID!").show();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage()).show();
+            }
+        }
+
+    }
+    private void clearFields() {
+        txtCourseId.clear();
+        txtCourseName.clear();
+        txtCourseDescription.clear();
+        txtCourseDurationWeeks.clear();
     }
 }

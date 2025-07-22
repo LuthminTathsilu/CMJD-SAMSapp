@@ -144,14 +144,113 @@ public class SubjectControlPageController implements Initializable {
     }
 
     public void SubjectSaveOnAction(ActionEvent actionEvent) {
+        String subjectId = txtSubjectId.getText().trim();
+        String subjectName = txtSubjectName.getText().trim();
+        String creditHours = txtSubjectCreditHours.getText().trim();
+        String courseId = txtSubjectCourseId.getText().trim();
+
+        if (subjectId.isEmpty() || subjectName.isEmpty() || creditHours.isEmpty() || courseId.isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Please fill all fields").show();
+            return;
+        }
+
+        String sql = "INSERT INTO Subject(subject_id, name, credit_hours, course_id) VALUES (?, ?, ?, ?)";
+
+        try (PreparedStatement pst = connection.prepareStatement(sql)) {
+            pst.setString(1, subjectId);
+            pst.setString(2, subjectName);
+            pst.setString(3, creditHours);
+            pst.setString(4, courseId);
+
+            int affectedRows = pst.executeUpdate();
+
+            if (affectedRows > 0) {
+                new Alert(Alert.AlertType.INFORMATION, "Subject saved successfully!").show();
+                clearFields();
+                loadSubjects();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Failed to save subject!").show();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage()).show();
+        }
     }
 
     public void SubjectUpdateOnAction(ActionEvent actionEvent) {
+        String subjectId = txtSubjectId.getText().trim();
+        String subjectName = txtSubjectName.getText().trim();
+        String creditHours = txtSubjectCreditHours.getText().trim();
+        String courseId = txtSubjectCourseId.getText().trim();
+
+        if (subjectId.isEmpty() || subjectName.isEmpty() || creditHours.isEmpty() || courseId.isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Please fill all fields").show();
+            return;
+        }
+
+        String sql = "UPDATE Subject SET name = ?, credit_hours = ?, course_id = ? WHERE subject_id = ?";
+
+        try (PreparedStatement pst = connection.prepareStatement(sql)) {
+            pst.setString(1, subjectName);
+            pst.setString(2, creditHours);
+            pst.setString(3, courseId);
+            pst.setString(4, subjectId);
+
+            int affectedRows = pst.executeUpdate();
+
+            if (affectedRows > 0) {
+                new Alert(Alert.AlertType.INFORMATION, "Subject updated successfully!").show();
+                clearFields();
+                loadSubjects();
+            } else {
+                new Alert(Alert.AlertType.WARNING, "No subject found with this ID!").show();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage()).show();
+        }
     }
 
     public void SubjectDeleteOnAction(ActionEvent actionEvent) {
+        String subjectId = txtSubjectId.getText().trim();
+
+        if (subjectId.isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Please select a subject to delete").show();
+            return;
+        }
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this subject?", ButtonType.YES, ButtonType.NO);
+        Optional<ButtonType> option = alert.showAndWait();
+
+        if (option.isPresent() && option.get() == ButtonType.YES) {
+            String sql = "DELETE FROM Subject WHERE subject_id = ?";
+
+            try (PreparedStatement pst = connection.prepareStatement(sql)) {
+                pst.setString(1, subjectId);
+
+                int affectedRows = pst.executeUpdate();
+
+                if (affectedRows > 0) {
+                    new Alert(Alert.AlertType.INFORMATION, "Subject deleted successfully!").show();
+                    clearFields();
+                    loadSubjects();
+                } else {
+                    new Alert(Alert.AlertType.WARNING, "No subject found with this ID!").show();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage()).show();
+            }
+        }
     }
 
     public void stuSubjectM(ActionEvent actionEvent) {
     }
+    private void clearFields() {
+        txtSubjectId.clear();
+        txtSubjectName.clear();
+        txtSubjectCreditHours.clear();
+        txtSubjectCourseId.clear();
+    }
+
 }
