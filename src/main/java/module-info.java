@@ -1,6 +1,7 @@
 module com.ijse.cmjd.samsapp {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens com.ijse.cmjd.samsapp to javafx.fxml;
