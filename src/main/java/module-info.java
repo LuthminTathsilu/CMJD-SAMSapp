@@ -6,4 +6,6 @@ module com.ijse.cmjd.samsapp {
 
     opens com.ijse.cmjd.samsapp to javafx.fxml;
     exports com.ijse.cmjd.samsapp;
+    exports controllers;
+    opens controllers to javafx.fxml;
 }
