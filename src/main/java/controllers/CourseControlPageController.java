@@ -23,22 +23,6 @@ public class CourseControlPageController {
     public Button Homebtn;
 
     public void signOut(ActionEvent actionEvent) {
-        try {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information Massage");
-            alert.setContentText("Are you sure you want to logout? ");
-            Optional<ButtonType> option = alert.showAndWait();
-            if(option.get().equals(ButtonType.OK)){
-                signOutbtn.getScene().getWindow().hide();
-                Parent load = FXMLLoader.load(getClass().getResource("/view/LoginPage.fxml"));
-                Scene scene = new Scene(load);
-                Stage stage = new Stage();
-                stage .setScene(scene);
-                stage.show();
-            }else return;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
 
     }
 
@@ -61,5 +45,14 @@ public class CourseControlPageController {
         Scene scene = new Scene(load);
         stage .setScene(scene);
         stage.show();
+    }
+
+    public void CourseSaveOnAction(ActionEvent actionEvent) {
+    }
+
+    public void CourseUpdateOnAction(ActionEvent actionEvent) {
+    }
+
+    public void CourseDeleteOnAction(ActionEvent actionEvent) {
     }
 }
