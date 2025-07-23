@@ -13,6 +13,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import service.Custom.StudentService;
+import service.ServiceFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,6 +23,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
 
 public class StudentControlPageController implements Initializable {
     public Button CourseControlbtn;
@@ -50,6 +53,9 @@ public class StudentControlPageController implements Initializable {
     public TableColumn<StudentTm, String> studentCourseIdcol;
 
     private Connection connection;
+    private final StudentService studentService = (StudentService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.STUDENT);
+    private ToggleGroup genderGroup;
+
 
     private ObservableList<StudentTm> addStudentsListD;
 
@@ -247,7 +253,7 @@ public class StudentControlPageController implements Initializable {
 
             if (affectedRows > 0) {
                 new Alert(Alert.AlertType.INFORMATION, "Student updated successfully!").show();
-                addStudentsShowListData(); // Refresh table
+                addStudentsShowListData();
             }
 
         } catch (SQLException e) {
