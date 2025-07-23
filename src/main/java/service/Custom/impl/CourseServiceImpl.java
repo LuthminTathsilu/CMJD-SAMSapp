@@ -1,5 +1,8 @@
 package service.Custom.impl;
 
+import dao.Custom.CourseDao;
+import dao.Custom.StudentDao;
+import dao.DaoFactory;
 import dto.CourseDto;
 import dto.StudentDto;
 import entity.CourseEntity;
@@ -9,6 +12,7 @@ import service.Custom.CourseService;
 import java.util.ArrayList;
 
 public class CourseServiceImpl implements CourseService {
+    private CourseDao courseDao = (CourseDao) DaoFactory.getInstance().getDao(DaoFactory.DaoTypes.COURSE);
 
     @Override
     public String saveCourse(CourseDto courseDto) throws Exception {
@@ -17,7 +21,7 @@ public class CourseServiceImpl implements CourseService {
                 courseDto.getName(),
                 courseDto.getDescription(),
                 courseDto.getDurationWeeks());
-        boolean isSaved = true;
+        boolean isSaved = courseDao.save(courseEntity);
         return isSaved ? "Succes" : "fail";
     }
 
@@ -28,19 +32,19 @@ public class CourseServiceImpl implements CourseService {
                 courseDto.getName(),
                 courseDto.getDescription(),
                 courseDto.getDurationWeeks());
-        boolean isUpdated = true;
+        boolean isUpdated = courseDao.update(courseEntity);
         return isUpdated ? "Succes" : "fail";
     }
 
     @Override
     public String deleteCourse(String CourseId) throws Exception {
-        boolean isDeleted = true;
+        boolean isDeleted = courseDao.delete(CourseId);
         return isDeleted ? "Succes" : "Fail";
     }
 
     @Override
     public CourseDto searchCourse(String CourseId) throws Exception {
-        CourseEntity courseEntity = null;
+        CourseEntity courseEntity = courseDao.search(CourseId);
         if(courseEntity != null){
             return new CourseDto(courseEntity.getCourse_id(),
                     courseEntity.getName(),
@@ -52,7 +56,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public ArrayList<CourseDto> getAllCourse() throws Exception {
-        ArrayList<CourseEntity> courseEntities = null;
+        ArrayList<CourseEntity> courseEntities = courseDao.getALL();
         ArrayList<CourseDto> courseDtos = new ArrayList<>();
         if (courseEntities != null){
             for (CourseEntity courseEntity : courseEntities){
