@@ -1,7 +1,7 @@
-package dao.impl;
+package dao.Custom.impl;
 
 import entity.StudentEntity;
-import ustom.StudentDao;
+import dao.Custom.StudentDao;
 
 import java.util.ArrayList;
 

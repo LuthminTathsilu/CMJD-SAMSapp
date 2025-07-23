@@ -1,4 +1,4 @@
-package ustom;
+package dao.Custom;
 
 import dao.CrudDao;
 import entity.StudentEntity;
