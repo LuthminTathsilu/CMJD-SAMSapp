@@ -23,14 +23,12 @@ public class DaoFactory {
                 return null;
             case ATTENDENCE:
                 return null;
-            case CLASS:
-                return null;
+
             case LECTURER:
                 return null;
             case USER:
                 return null;
-            case CLASS_LECTURER:
-                return null;
+
             case SUBJECT:
                 return null;
             default:
