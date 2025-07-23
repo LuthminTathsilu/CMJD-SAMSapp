@@ -13,6 +13,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import service.Custom.CourseService;
+import service.Custom.StudentService;
+import service.ServiceFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,6 +45,8 @@ public class CourseControlPageController implements Initializable {
     public Button CHomebtn;
 
     private Connection connection;
+    private final CourseService courseService = (CourseService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.COURSE);
+    private ToggleGroup genderGroup;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

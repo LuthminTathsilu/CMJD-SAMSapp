@@ -178,7 +178,6 @@ public class SubjectControlPageController implements Initializable {
     }
 
     public void SubjectUpdateOnAction(ActionEvent actionEvent) {
-
         String subjectId = txtSubjectId.getText().trim();
         String subjectName = txtSubjectName.getText().trim();
         String creditHours = txtSubjectCreditHours.getText().trim();

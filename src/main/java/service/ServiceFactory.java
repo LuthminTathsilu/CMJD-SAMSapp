@@ -1,5 +1,7 @@
 package service;
 
+import service.Custom.impl.*;
+
 public class ServiceFactory {
     private static ServiceFactory serviceFactory;
 
@@ -15,15 +17,15 @@ public class ServiceFactory {
     public SuperService getService(ServiceType type){
         switch (type) {
             case STUDENT:
-                return null;
+                return new StudentServiceImpl();
             case LECTURER:
-                return null;
+                return new LecturerServiceImpl();
             case SUBJECT:
-                return null;
-            case ATTENDENCE:
-                return null;
+                return new SubjectServiceImpl();
+            case ATTENDENCE :
+                return new AttendenceServiceImpl();
             case COURSE:
-                return null;
+                return new CourseServiceImpl();
             default:
                 return null;
         }
