@@ -13,6 +13,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import service.Custom.AttendenceService;
+import service.Custom.CourseService;
+import service.ServiceFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -46,7 +49,8 @@ public class AttendenceControlPageController implements Initializable {
     public TableColumn<AttendenceTm, String> attendenceMarkedTimecol;
     public TextField txtAttendanceId;
 
-
+    private final AttendenceService attendenceService = (AttendenceService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.ATTENDENCE);
+    private ToggleGroup genderGroup;
     Connection connection;
 
     @Override

@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import service.Custom.CourseService;
 import service.Custom.StudentService;
 import service.ServiceFactory;
 
@@ -23,7 +24,6 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
 
 public class StudentControlPageController implements Initializable {
     public Button CourseControlbtn;
@@ -53,11 +53,10 @@ public class StudentControlPageController implements Initializable {
     public TableColumn<StudentTm, String> studentCourseIdcol;
 
     private Connection connection;
-    private final StudentService studentService = (StudentService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.STUDENT);
-    private ToggleGroup genderGroup;
-
 
     private ObservableList<StudentTm> addStudentsListD;
+    private final StudentService studentService = (StudentService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.STUDENT);
+    private ToggleGroup genderGroup;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -120,12 +119,12 @@ public class StudentControlPageController implements Initializable {
     public void onStudentTableClick() {
         StudentTm selectedStudent = tblStudent.getSelectionModel().getSelectedItem();
         if (selectedStudent != null) {
-            txtStudentId.setText(selectedStudent.getStudent_id());
+            txtStudentId.setText(selectedStudent.getStudentId());
             txtStudentName.setText(selectedStudent.getName());
-            txtStudentRegNumber.setText(selectedStudent.getReg_number());
+            txtStudentRegNumber.setText(selectedStudent.getRegNumber());
             txtStudentEmail.setText(selectedStudent.getEmail());
             txtStudentContact.setText(selectedStudent.getContact());
-            txtStudentCourseId.setText(selectedStudent.getCourse_id());
+            txtStudentCourseId.setText(selectedStudent.getCourseId());
 
             if (selectedStudent.getDob() != null) {
                 dateDob.setValue(LocalDate.parse(selectedStudent.getDob().toLocaleString()));
@@ -177,11 +176,12 @@ public class StudentControlPageController implements Initializable {
     }
 
     public void stuAttendenceM(ActionEvent actionEvent) throws IOException {
-        Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/AttendanceControlPage.fxml")));
+        Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/AttendenceControlPage.fxml")));
         Stage stage = new Stage();
         stage.setScene(new Scene(load));
         stage.show();
     }
+
 
     public void CHomeM(ActionEvent actionEvent) throws IOException {
         Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/Dashboard.fxml")));
@@ -214,8 +214,8 @@ public class StudentControlPageController implements Initializable {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Error searching student").show();
         }
-
     }
+
     public void StudentDeleteOnAction(ActionEvent actionEvent) {
         String sql = "DELETE FROM Student WHERE student_id=?";
 
@@ -227,15 +227,15 @@ public class StudentControlPageController implements Initializable {
             if (affectedRows > 0) {
                 new Alert(Alert.AlertType.INFORMATION, "Student deleted successfully!").show();
                 clearStudentFields();
-                addStudentsShowListData(); // Refresh table
+                addStudentsShowListData();
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Error deleting student").show();
         }
-
     }
+
     public void StudentUpdateOnAction(ActionEvent actionEvent) {
         String sql = "UPDATE Student SET name=?, reg_number=?, gender=?, dob=?, email=?, contact=?, course_id=? WHERE student_id=?";
 
@@ -260,8 +260,8 @@ public class StudentControlPageController implements Initializable {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Error updating student").show();
         }
-
     }
+
     public void StudentSaveOnAction(ActionEvent actionEvent) {
         String sql = "INSERT INTO Student (student_id, name, reg_number, gender, dob, email, contact, course_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -279,14 +279,13 @@ public class StudentControlPageController implements Initializable {
 
             if (affectedRows > 0) {
                 new Alert(Alert.AlertType.INFORMATION, "Student saved successfully!").show();
-                addStudentsShowListData(); // Refresh table
+                addStudentsShowListData();
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Error saving student").show();
         }
-
     }
     private void clearStudentFields() {
         txtStudentId.clear();
@@ -298,4 +297,6 @@ public class StudentControlPageController implements Initializable {
         dateDob.setValue(null);
         choiceStudentGender.setValue(null);
     }
+
+
 }

@@ -13,6 +13,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import service.Custom.CourseService;
+import service.Custom.LecturerService;
+import service.ServiceFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -43,6 +46,8 @@ public class LectureControlPageController implements Initializable {
     public TextField txtLectureDepartment;
     public TextField txtLectureEmail;
     public TextField txtLectureContact;
+    private final LecturerService lecturerService = (LecturerService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.LECTURER);
+    private ToggleGroup genderGroup;
 
     private Connection connection;
 

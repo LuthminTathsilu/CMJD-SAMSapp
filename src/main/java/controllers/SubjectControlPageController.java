@@ -13,6 +13,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import service.Custom.CourseService;
+import service.Custom.SubjectService;
+import service.ServiceFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,6 +45,9 @@ public class SubjectControlPageController implements Initializable {
     public TableColumn<SubjectTm, String> subjectNamecol;
     public TableColumn<SubjectTm, String> subjectCreditHourscol;
     public TableColumn<SubjectTm, String> subjectCourseIdcol;
+
+    private final SubjectService subjectService = (SubjectService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.SUBJECT);
+    private ToggleGroup genderGroup;
 
     Connection connection;
 

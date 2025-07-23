@@ -1,20 +1,22 @@
 package dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 public class StudentDto {
-    private String student_id;
+
+    private String studentId;
     private String name;
-    private String reg_number;
+    private String regNumber;
     private String gender;
     private Date dob;
     private String email;
     private String contact;
-    private String course_id;
+    private String courseId;
+
+
 }
