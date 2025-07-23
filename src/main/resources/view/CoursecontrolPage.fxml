@@ -13,7 +13,19 @@
    <children>
       <AnchorPane fx:id="ancCourse" layoutX="56.0" layoutY="34.0">
          <children>
-            <AnchorPane layoutX="132.0" layoutY="-34.0" prefHeight="453.0" prefWidth="181.0" style="-fx-background-color: A2AAD;">
+            <AnchorPane layoutX="315.0" layoutY="5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="361.0">
+               <children>
+                  <TableView fx:id="tblCourse" layoutY="-7.0" prefHeight="417.0" prefWidth="361.0">
+                     <columns>
+                        <TableColumn fx:id="courseIdcol" prefWidth="92.0" text="course_id" />
+                        <TableColumn fx:id="courseNamecol" prefWidth="85.0" text="name" />
+                        <TableColumn fx:id="courseDescriptioncol" prefWidth="84.0" text="description" />
+                        <TableColumn fx:id="courseDurationWeekscol" prefWidth="93.0" text="duration_weeks" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="132.0" layoutY="-34.0" prefHeight="453.0" prefWidth="181.0" style="-fx-background-color: A2AADB;">
                <children>
                   <Label layoutX="8.0" layoutY="122.0" prefHeight="17.0" prefWidth="166.0" text="Course Id : ">
                      <font>
@@ -42,18 +54,6 @@
                   <Button layoutX="15.0" layoutY="345.0" mnemonicParsing="false" onAction="#CourseSaveOnAction" text="Save" />
                   <Button layoutX="67.0" layoutY="345.0" mnemonicParsing="false" onAction="#CourseUpdateOnAction" text="Update" />
                   <Button layoutX="130.0" layoutY="345.0" mnemonicParsing="false" onAction="#CourseDeleteOnAction" text="Delete" />
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutX="315.0" layoutY="5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="361.0">
-               <children>
-                  <TableView fx:id="tblCourse" layoutY="-7.0" prefHeight="417.0" prefWidth="361.0">
-                     <columns>
-                        <TableColumn fx:id="courseIdcol" prefWidth="92.0" text="course_id" />
-                        <TableColumn fx:id="courseNamecol" prefWidth="85.0" text="name" />
-                        <TableColumn fx:id="courseDescriptioncol" prefWidth="84.0" text="description" />
-                        <TableColumn fx:id="courseDurationWeekscol" prefWidth="93.0" text="duration_weeks" />
-                     </columns>
-                  </TableView>
                </children>
             </AnchorPane>
          </children>

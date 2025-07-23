@@ -6,34 +6,42 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom right, #f0f0f0, #dcdcdc); -fx-background-color: #FF99A1;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DashboardController">
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DashboardController">
-   <children>
-      <AnchorPane layoutX="148.0" layoutY="43.0" prefHeight="396.0" prefWidth="324.0" style="-fx-background-color: #D2C1B6;">
-         <children>
-            <Label layoutX="112.0" layoutY="52.0" text="Welcome,">
-               <font>
-                  <Font name="Avenir-Heavy" size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="140.0" layoutY="82.0" text="User" textFill="#171717">
-               <font>
-                  <Font name="Avenir-Heavy" size="20.0" />
-               </font>
-            </Label>
-            <Line endX="95.0" layoutX="160.0" layoutY="123.0" startX="-91.0" />
-            <Button fx:id="CourseControlbtn" layoutX="87.0" layoutY="147.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#CourseControl" prefHeight="25.0" prefWidth="151.0" style="-fx-background-color: #456882;" text="Course Management" textFill="WHITE" />
-            <Button fx:id="StudentControlbtn" layoutX="87.0" layoutY="188.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#StudentControl" prefHeight="25.0" prefWidth="151.0" style="-fx-background-color: #456882;" text="Student Management" textFill="WHITE" />
-            <Button fx:id="LectureControlbtn" layoutX="87.0" layoutY="229.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#LectureControl" prefHeight="25.0" prefWidth="151.0" style="-fx-background-color: #456882;" text="Lecturer Management" textFill="WHITE" />
-            <Button fx:id="SubjectControlbtn" layoutX="87.0" layoutY="269.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#SubjectControl" prefHeight="25.0" prefWidth="151.0" style="-fx-background-color: #456882;" text="Subject Management" textFill="WHITE" />
-            <Button fx:id="AttendenceControlbtn" layoutX="88.0" layoutY="309.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#AttendenceControl" style="-fx-background-color: #456882;" text="Attendence Management" textFill="WHITE" />
-            <Button fx:id="signOutbtn" layoutX="30.0" layoutY="361.0" mnemonicParsing="false" onAction="#signOut" style="-fx-background-color: #B33F40;" text="Logout" textFill="WHITE" />
-         </children>
-      </AnchorPane>
-      <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="8.0" layoutX="336.0" layoutY="4.0" prefHeight="17.0" prefWidth="283.0" text="Student Attendence Management System" textOverrun="WORD_ELLIPSIS">
-         <font>
-            <Font name="Arial Bold" size="14.0" />
-         </font>
-      </Label>
-   </children>
+   <AnchorPane layoutX="150.0" layoutY="30.0" prefHeight="350.0" prefWidth="300.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+
+      <children>
+         <Label layoutX="92.0" layoutY="30.0" text="Welcome," textFill="#333333">
+            <font>
+               <Font name="Arial Bold" size="24.0" />
+            </font>
+         </Label>
+
+         <Label layoutX="129.0" layoutY="65.0" text="User" textFill="#555555">
+            <font>
+               <Font name="Arial" size="18.0" />
+            </font>
+         </Label>
+
+         <Line endX="90.0" layoutX="150.0" layoutY="100.0" startX="-90.0" />
+
+         <Button fx:id="CourseControlbtn" layoutX="75.0" layoutY="120.0" onAction="#CourseControl" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #FFF288;" styleClass="dashboard-button" text="Course Management" />
+
+         <Button fx:id="StudentControlbtn" layoutX="75.0" layoutY="165.0" onAction="#StudentControl" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #FF8088;" styleClass="dashboard-button" text="Student Management" />
+
+         <Button fx:id="LectureControlbtn" layoutX="75.0" layoutY="210.0" onAction="#LectureControl" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #FFF288;" styleClass="dashboard-button" text="Lecturer Management" />
+
+         <Button fx:id="SubjectControlbtn" layoutX="75.0" layoutY="255.0" onAction="#SubjectControl" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #FF8088;" styleClass="dashboard-button" text="Subject Management" />
+
+         <Button fx:id="AttendenceControlbtn" layoutX="75.0" layoutY="300.0" onAction="#AttendenceControl" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #FFF088;" styleClass="dashboard-button" text="Attendance Management" />
+
+         <Button fx:id="signOutbtn" layoutX="9.0" layoutY="320.0" onAction="#signOut" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 15;" text="Logout" />
+      </children>
+   </AnchorPane>
+
+   <Label layoutX="155.0" layoutY="5.0" text="Student Attendance Management System" textFill="#2c3e50">
+      <font>
+         <Font name="Arial Bold" size="14.0" />
+      </font>
+   </Label>
 </AnchorPane>
