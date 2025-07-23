@@ -1,5 +1,7 @@
 package dao;
 
+import dao.Custom.impl.StudentDaoImpl;
+
 import java.lang.classfile.instruction.SwitchCase;
 
 public class DaoFactory {
@@ -16,7 +18,7 @@ public class DaoFactory {
     public SuperDao getDao(DaoTypes type){
         switch (type){
             case STUDENT:
-             return null;
+             return new StudentDaoImpl();
             case COURSE:
                 return null;
             case ATTENDENCE:
